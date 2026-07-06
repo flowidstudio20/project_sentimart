@@ -20,11 +20,10 @@ import numpy as np
 import streamlit as st
 
 # Opsi 1: Muat model lokal dari folder proyek Anda (default)
-MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model", "indobert_sentiment_final")
+# MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model", "indobert_sentiment_final")
 
 # Opsi 2: Hubungkan langsung ke repositori model Hugging Face Anda
-# Hapus tanda komentar (#) di bawah ini dan ganti dengan repositori Hugging Face Anda:
-# MODEL_DIR = "username/nama-model-anda"
+MODEL_DIR = "flowidstudio/sentimart"
 
 MAX_LENGTH = 128
 LABEL_MAP = {0: "Negative", 1: "Positive"}
