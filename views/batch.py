@@ -1,5 +1,6 @@
 import io
 import pandas as pd
+import textwrap
 import streamlit as st
 import plotly.express as px
 from utils.model_loader import predict_batch, model_is_available
@@ -144,15 +145,15 @@ if uploaded is not None:
             use_container_width=True,
         )
 else:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="background:#f8fafc; border:1px dashed #e2e8f0; border-radius:10px; padding:2rem; text-align:center; color:#94a3b8; font-size:0.85rem;">
         Unggah file CSV di atas untuk memulai analisis.
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 
 if not model_is_available():
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:6px; padding:0.75rem 1rem; margin-top:1.5rem; font-size:0.75rem; color:#b45309;">
         Sistem berjalan dalam mode demo. Unggah model terlatih ke folder <code>model/indobert_sentiment_final/</code> untuk menggunakan model IndoBERT asli.
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)

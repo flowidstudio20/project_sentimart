@@ -1,4 +1,5 @@
 import pandas as pd
+import textwrap
 import streamlit as st
 import plotly.graph_objects as go
 import plotly.express as px
@@ -69,11 +70,11 @@ st.caption("Hasil evaluasi model IndoBERT terlatih pada dataset PRDECT-ID.")
 
 metrics = load_metrics()
 if metrics.get("is_demo"):
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:6px; padding:0.75rem 1rem; margin-bottom:1.2rem; font-size:0.78rem; color:#b45309;">
         Catatan: Menampilkan data estimasi (data proposal). Tempel berkas <code>metrics.json</code> ke folder <code>model/metrics.json</code> untuk melihat metrik latih asli.
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 
 cm = metrics["confusion_matrix"]
 
@@ -88,7 +89,7 @@ card_specs = [
 
 for label, val, desc, col in card_specs:
     with col:
-        st.markdown(f"""
+        st.markdown(textwrap.dedent(f"""
         <div class="perf-card-flat">
             <div>
                 <div class="perf-badge-flat">{label}</div>
@@ -96,7 +97,7 @@ for label, val, desc, col in card_specs:
             </div>
             <div class="perf-desc-flat">{desc}</div>
         </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)
 
 st.write("")
 col_cm, col_curve = st.columns(2)

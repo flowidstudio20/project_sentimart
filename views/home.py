@@ -1,4 +1,5 @@
 import streamlit as st
+import textwrap
 from utils.metrics_data import load_metrics
 
 # ---------- Global style (Modern, Simple, Flat with Blue Accents) ----------
@@ -237,29 +238,29 @@ st.markdown(f"""
 # 3 Metrics Row (Flat Cards)
 c1, c2, c3 = st.columns(3)
 with c1:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div class="stat-card-flat">
         <div class="stat-value-flat">5,400+</div>
         <div class="stat-label-flat">Dataset PRDECT-ID</div>
         <div class="stat-sub-flat">Ulasan asli dari 29 kategori produk e-commerce Indonesia.</div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 with c2:
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="stat-card-flat">
         <div class="stat-value-flat">{metrics["accuracy"]*100:.2f}%</div>
         <div class="stat-label-flat">Akurasi Model</div>
         <div class="stat-sub-flat">Akurasi hasil pengujian model IndoBERT base di dataset uji.</div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 with c3:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div class="stat-card-flat">
         <div class="stat-value-flat">2 Kelas</div>
         <div class="stat-label-flat">Sentimen</div>
         <div class="stat-sub-flat">Klasifikasi biner untuk memisahkan ulasan ke kelas Positif atau Negatif.</div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 
 # NLP Pipeline Section (Flat with SVG outline icons)
 st.markdown("""
@@ -310,7 +311,7 @@ st.markdown("<h4 style='color:#0f172a; margin-bottom:1rem; text-align:center;'>F
 
 r1c1, r1c2 = st.columns(2)
 with r1c1:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div class="feature-card-flat">
         <div class="feature-header-flat">
             <div class="feature-icon-svg-wrapper">
@@ -322,9 +323,9 @@ with r1c1:
             Analisis real-time untuk satu teks ulasan produk e-commerce. Model akan menampilkan hasil kelas dan nilai probabilitas keyakinan.
         </p>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 with r1c2:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div class="feature-card-flat">
         <div class="feature-header-flat">
             <div class="feature-icon-svg-wrapper">
@@ -336,12 +337,12 @@ with r1c2:
             Unggah berkas CSV ulasan untuk memproses klasifikasi secara massal. Dapatkan visualisasi ringkasan dan download hasil prediksi CSV.
         </p>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 
 st.write("")
 r2c1, r2c2 = st.columns(2)
 with r2c1:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div class="feature-card-flat">
         <div class="feature-header-flat">
             <div class="feature-icon-svg-wrapper">
@@ -353,9 +354,9 @@ with r2c1:
             Tinjau metrik hasil evaluasi model IndoBERT base melalui confusion matrix dan visualisasi kurva loss latihan/validasi.
         </p>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 with r2c2:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div class="feature-card-flat">
         <div class="feature-header-flat">
             <div class="feature-icon-svg-wrapper">
@@ -367,7 +368,7 @@ with r2c2:
             Detail mengenai dataset ulasan PRDECT-ID yang digunakan, arsitektur dasar model, diagram metodologi, dan data pengembang.
         </p>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 
 # Minimalist Footer
 st.markdown("<hr style='margin:3rem 0 1.5rem 0; border:0; border-top:1px solid #e2e8f0;'>", unsafe_allow_html=True)
