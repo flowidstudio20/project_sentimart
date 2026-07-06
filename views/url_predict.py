@@ -1,6 +1,8 @@
 import io
 import re
-import textwrap
+
+def clean_html(html_str: str) -> str:
+    return "\n".join(line.strip() for line in html_str.split("\n"))
 import requests
 from urllib.parse import urlparse
 import pandas as pd
@@ -87,7 +89,7 @@ if run_clicked:
 
         if is_ecommerce:
             source_type = "Simulasi E-Commerce (Cloudflare Bypass)"
-            st.markdown(textwrap.dedent(f"""
+            st.markdown(clean_html(f"""
             <div class="url-warning-box">
                 <strong>🛡️ Informasi Proteksi Bot E-Commerce:</strong><br>
                 Domain <b>{domain}</b> terdeteksi sebagai e-commerce besar. Website ini menggunakan proteksi anti-bot ketat (seperti Cloudflare, CAPTCHA, JavaScript challenge, dan session cookie).<br><br>
@@ -110,7 +112,7 @@ if run_clicked:
             ]
         else:
             source_type = "Scraping HTML Nyata"
-            st.markdown(textwrap.dedent(f"""
+            st.markdown(clean_html(f"""
             <div class="url-info-box">
                 <strong>🌐 Melakukan Scraping Nyata:</strong><br>
                 Membaca halaman <b>{domain}</b> secara langsung dan mengekstrak semua paragraf teks (panjang > 15 karakter) yang ditemukan di struktur HTML.
@@ -229,14 +231,14 @@ if run_clicked:
                 use_container_width=True
             )
 else:
-    st.markdown(textwrap.dedent("""
+    st.markdown(clean_html("""
     <div style="background:#f8fafc; border:1px dashed #e2e8f0; border-radius:10px; padding:2.5rem; text-align:center; color:#94a3b8; font-size:0.85rem;">
         🔗 Masukkan link URL website di atas lalu klik <b>Analisis URL</b> untuk mendeteksi sentimen teks.
     </div>
     """), unsafe_allow_html=True)
 
 if not model_is_available():
-    st.markdown(textwrap.dedent("""
+    st.markdown(clean_html("""
     <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:6px; padding:0.75rem 1rem; margin-top:1.5rem; font-size:0.75rem; color:#b45309;">
         Sistem berjalan dalam mode demo. Unggah model terlatih ke folder <code>model/indobert_sentiment_final/</code> untuk menggunakan model IndoBERT asli.
     </div>

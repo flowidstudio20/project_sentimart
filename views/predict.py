@@ -1,6 +1,8 @@
 import streamlit as st
-import textwrap
 from utils.model_loader import predict_sentiment, model_is_available
+
+def clean_html(html_str: str) -> str:
+    return "\n".join(line.strip() for line in html_str.split("\n"))
 
 # CSS Injection for Modern Minimalist Prediction Page
 st.markdown("""
@@ -246,7 +248,7 @@ if submit_clicked:
 
         if label == "Positive":
             # Outlined checklist icon for positive
-            st.markdown(textwrap.dedent(f"""
+            st.markdown(clean_html(f"""
             <div class="result-card-pos-flat">
                 <div class="result-icon-svg pos">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
@@ -259,7 +261,7 @@ if submit_clicked:
             """), unsafe_allow_html=True)
         else:
             # Outlined alert icon for negative
-            st.markdown(textwrap.dedent(f"""
+            st.markdown(clean_html(f"""
             <div class="result-card-neg-flat">
                 <div class="result-icon-svg neg">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
@@ -272,7 +274,7 @@ if submit_clicked:
             """), unsafe_allow_html=True)
 
         # Probabilities Custom Dashboard
-        st.markdown(textwrap.dedent(f"""
+        st.markdown(clean_html(f"""
         <div class="probs-container-flat">
             <div class="probs-header-flat">Probabilitas Kepercayaan Model</div>
             
@@ -298,14 +300,14 @@ if submit_clicked:
         </div>
         """), unsafe_allow_html=True)
 else:
-    st.markdown(textwrap.dedent("""
+    st.markdown(clean_html("""
     <div style="background:#f8fafc; border:1px dashed #e2e8f0; border-radius:10px; padding:1.5rem; text-align:center; color:#94a3b8; font-size:0.85rem;">
         Hasil analisis sentimen akan ditampilkan di sini.
     </div>
     """), unsafe_allow_html=True)
 
 if not model_is_available():
-    st.markdown(textwrap.dedent("""
+    st.markdown(clean_html("""
     <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:6px; padding:0.75rem 1rem; margin-top:1.5rem; font-size:0.75rem; color:#b45309;">
         Sistem berjalan dalam mode demo. Letakkan model terlatih Anda di folder <code>model/indobert_sentiment_final/</code> untuk analisis aktual.
     </div>
