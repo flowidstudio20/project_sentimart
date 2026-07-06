@@ -19,19 +19,39 @@ import os
 import numpy as np
 import streamlit as st
 
+# Opsi 1: Muat model lokal dari folder proyek Anda (default)
 MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model", "indobert_sentiment_final")
+
+# Opsi 2: Hubungkan langsung ke repositori model Hugging Face Anda
+# Hapus tanda komentar (#) di bawah ini dan ganti dengan repositori Hugging Face Anda:
+# MODEL_DIR = "username/nama-model-anda"
+
 MAX_LENGTH = 128
 LABEL_MAP = {0: "Negative", 1: "Positive"}
 
 
 def model_is_available() -> bool:
-    return os.path.isdir(MODEL_DIR) and any(
-        f.startswith("config.json") for f in os.listdir(MODEL_DIR)
-    ) if os.path.isdir(MODEL_DIR) else False
+    # Jika MODEL_DIR adalah path lokal, cek keberadaannya
+    if os.path.exists(MODEL_DIR) and os.path.isdir(MODEL_DIR):
+        return any(f.startswith("config.json") for f in os.listdir(MODEL_DIR))
+    # Jika MODEL_DIR merujuk ke model hub Hugging Face (mengandung / dan bukan folder lokal)
+    if isinstance(MODEL_DIR, str) and "/" in MODEL_DIR:
+        return True
+    return False
 
 
 def get_model_debug_info() -> dict:
     """Info diagnostik untuk membantu cari tahu kenapa model tidak terdeteksi di deployment."""
+    if isinstance(MODEL_DIR, str) and "/" in MODEL_DIR and not os.path.isdir(MODEL_DIR):
+        return {
+            "expected_model_dir": MODEL_DIR,
+            "model_root_exists": False,
+            "model_dir_exists": False,
+            "files_in_model_root": [],
+            "files_in_model_dir": [],
+            "suspicious_small_files": [],
+            "note": "Menggunakan model dari Hugging Face Hub."
+        }
     model_root = os.path.dirname(MODEL_DIR)
     info = {
         "expected_model_dir": MODEL_DIR,
