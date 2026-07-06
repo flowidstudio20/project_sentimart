@@ -4,3 +4,5 @@ numpy>=1.26
 plotly>=5.22
 torch>=2.2
 transformers>=4.43
+beautifulsoup4
+requests
